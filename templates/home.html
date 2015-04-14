@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<br><br><br>
+
+<div class="container">
+  <form method="POST" action="/post/" enctype="multipart/form-data">
+    <textarea class="input-block-level lastinput" type="text" name="wallpost" maxlength="1000" placeholder="Post anonymously to everyone" required></textarea>
+    <p><button class="btn btn-default input-block-level" name="submit" type="submit">Post</button></p>
+    </form>
+  <br><br>
+  {% for w in wallposts %}
+    <div class="box">
+      <p>{{w.wallpost}}</p>
+      <p class="textal">{{w.date}}</p>
+    </div><br>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+{% endblock %}

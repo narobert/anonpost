@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+
+<div class="container">
+  <center>
+  <div class="together">
+    <img class="photo" src="/static/images/nick_prof.jpg"></img>
+    <div class="togetheragain">
+      <h3 class="profilename">{{user.username}}</h3>
+      <p class="city">La Jolla</p>
+      <p class="age">23 years old</p>
+    </div>
+  </div>
+  <br><br>
+    <form method="POST" action="/postto/{{user.username}}/" enctype="multipart/form-data">
+      <textarea class="input-block-level lastinput" type="text" name="profilepost" maxlength="1000" placeholder="Post anonymously on your own wall" required></textarea>
+      <p><button class="btn btn-default input-block-level" name="submit" type="submit">Post</button></p>
+    </form>
+  <br><br>
+  </center>
+  {% for p in profileposts %}
+    <div class="box">
+      <p>{{p.profilepost}}</p>
+      <p class="textal">{{p.date}} by {{p.user1.username}}</p>
+    </div><br>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+{% endblock %}

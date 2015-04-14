@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bullpost | Anonymous social network</title>
+
+    <!-- Bootstrap -->
+    <link type='text/css' href="/static/css/bootstrap.css" rel="stylesheet" />
+    <link type='text/css' href="/static/css/style.css" rel="stylesheet" />
+    <link type='text/css' href="/static/css/simple-sidebar.css" rel="stylesheet" />
+
+    {% block css %}
+    {% endblock %}
+
+    <style>
+    body {
+      font-family: Baskerville, serif !important;
+      padding-top: 60px;
+    }
+    </style>
+
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Bullpost</a>
+          <ul class="nav pull-right">
+
+            {% if user.is_authenticated %}
+            <li class="dropdown">
+              <a data-toggle="dropdown" style="cursor:pointer;">{{user.username}} ({{total}})</a>
+              <ul class="dropdown-menu">
+                {% for a in allposts %}
+                  {% if a.clicked == False %}
+                    <li class="needclick"><a href="/view/{{a.id}}/">post by {{a.user1.username}}</a></li>
+                  {% else %}
+                    <li class="clicked"><a href="/view/{{a.id}}/">post by {{a.user1.username}}</a></li>
+                  {% endif %}
+                {% endfor %}
+                <li><a href="/myprofile/">view my profile</a></li>
+                <li><a href="/logout/">logout</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <form method="post" action="/login/" style="margin:0;">
+              <input type="text" name="username" maxlength="254" placeholder="Username" required>
+              <input type="password" name="password" maxlength="4096" placeholder="Password" required>
+              <button class="btn" name="submit" type="submit">Sign in</button>
+            </form>
+            {% endif %}
+
+          </ul>
+
+          {% if user.is_authenticated %}
+          {% else %}
+          <ul class="nav">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          {% endif %}
+	
+        </div>
+      </div>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="slidebar">
+      <a href="#menu-toggle" id="menu-toggle">&gt;</a>
+    </div>
+
+    <div id="wrapper">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" id="friendsList">
+          <div class="sidebar-brand"><input type="text" onkeyup="filter(this)" placeholder="filter"></div>
+          {% for f in friends %}
+            {% if f.username != user.username %}
+            <li><p><a href="/profile/{{f.username}}/">{{f.username}}</a></p></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% else %}
+    {% endif %}
+
+
+    {% block body %}
+    {% endblock %}
+
+    {% block extra-js %}
+    {% endblock %}
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+
+    function filter(element) {
+        var value = $(element).val();
+        $("#friendsList > li").each(function() {
+            if ($(this).text().search(value) > -1) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(".slidebar").toggleClass("switched");
+        if ($("#wrapper").hasClass("toggled")) {
+            $(this).html("&lt;&nbsp;&nbsp;&nbsp;Expand&nbsp;");
+        }
+        else {
+            $(this).html("&gt;");
+        }
+    });
+
+    var dropdown = document.querySelectorAll('.dropdown');
+    var dropdownArray = Array.prototype.slice.call(dropdown,0);
+    dropdownArray.forEach(function(el){
+        var button = el.querySelector('a[data-toggle="dropdown"]'), menu = el.querySelector('.dropdown-menu'), arrow = button.querySelector('i.icon-arrow');
+        button.onclick = function(event) {
+            if(!menu.hasClass('show')) {
+                menu.classList.add('show');
+                menu.classList.remove('hide');
+                arrow.classList.add('open');
+                arrow.classList.remove('close');
+                event.preventDefault();
+            }
+            else {
+                menu.classList.remove('show');
+                menu.classList.add('hide');
+                arrow.classList.remove('open');
+                arrow.classList.add('close');
+                event.preventDefault();
+            }
+        };
+    })
+
+    Element.prototype.hasClass = function(className) {
+        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+    };
+
+    </script>
+    <script type='text/javascript' src="/static/js/bootstrap.js"></script>
+    <script type='text/javascript' src="/static/js/Story.js"></script>
+
+  </body>
+</html>

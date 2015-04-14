@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+
+<div class="container">
+  <div class="box">
+    <p>{{profileposts.profilepost}}</p>
+    <p class="textal">{{profileposts.date}} by {{profileposts.user1.username}}</p>
+  </div><br>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+{% endblock %}
