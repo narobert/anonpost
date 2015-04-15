@@ -18,15 +18,17 @@
     </div>
   </div>
   <br><br>
-    <form method="POST" action="/postto/{{username}}/" enctype="multipart/form-data">
-      <textarea class="input-block-level lastinput" type="text" name="profilepost" maxlength="1000" placeholder="Post anonymously on {{username}}'s wall" required></textarea>
-      <p><button class="btn btn-default input-block-level" name="submit" type="submit">Post</button></p>
+  <div class="formcontainer">
+    <form method="POST" action="/postto/{{username}}/" enctype="multipart/form-data" style="margin:0;">
+      <textarea class="input-block-level lastinput" id="textbox" type="text" name="profilepost" maxlength="1000" placeholder="Post anonymously on {{username}}'s wall" required></textarea>
+      <div class="buttonbox"><p style="margin:0;text-align:right;"><button class="btn btn-default" id="orangebutton" name="submit" type="submit">Post</button></p></div>
     </form>
+  </div>
   <br><br>
   </center>
   {% for p in profileposts %}
     <div class="box">
-      <p>{{p.profilepost}}</p>
+      <p class="whitetext">{{p.profilepost}}</p>
       {% if user.username == p.user1.username %}
         <p class="textal">{{p.date}} by {{p.user1.username}}</p>
       {% else %}

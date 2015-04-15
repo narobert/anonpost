@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bullpost | Anonymous social network</title>
+    <title>Hazebucket | Anonymous social network</title>
 
     <!-- Bootstrap -->
     <link type='text/css' href="/static/css/bootstrap.css" rel="stylesheet" />
@@ -17,6 +17,7 @@
     <style>
     body {
       font-family: Baskerville, serif !important;
+      background: #151c2b;
       padding-top: 60px;
     }
     </style>
@@ -29,7 +30,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/">Bullpost</a>
+          <a class="brand" href="/">Haze<font style="color:#f90;">bucket</font></a>
           <ul class="nav pull-right">
 
             {% if user.is_authenticated %}
@@ -77,10 +78,10 @@
     <div id="wrapper">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav" id="friendsList">
-          <div class="sidebar-brand"><input type="text" onkeyup="filter(this)" placeholder="filter"></div>
+          <div class="sidebar-brand"><input class="filterinput" type="text" onkeyup="filter(this)" placeholder="filter"></div>
           {% for f in friends %}
             {% if f.username != user.username %}
-            <li><p><a href="/profile/{{f.username}}/">{{f.username}}</a></p></li>
+            <li><p style="margin:0;color:white;"><a href="/profile/{{f.username}}/">{{f.username}}</a></p></li>
             {% endif %}
           {% endfor %}
         </ul>

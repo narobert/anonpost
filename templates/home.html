@@ -8,14 +8,16 @@
 <br><br><br>
 
 <div class="container">
-  <form method="POST" action="/post/" enctype="multipart/form-data">
-    <textarea class="input-block-level lastinput" type="text" name="wallpost" maxlength="1000" placeholder="Post anonymously to everyone" required></textarea>
-    <p><button class="btn btn-default input-block-level" name="submit" type="submit">Post</button></p>
+  <div class="formcontainer">
+    <form method="POST" action="/post/" enctype="multipart/form-data" style="margin:0;">
+      <textarea class="input-block-level lastinput" id="textbox" type="text" name="wallpost" maxlength="1000" placeholder="Post anonymously to everyone" required></textarea>
+      <div class="buttonbox"><p style="margin:0;text-align:right;"><button class="btn btn-default" id="orangebutton" name="submit" type="submit">Post</button></p></div>
     </form>
+  </div>
   <br><br>
   {% for w in wallposts %}
     <div class="box">
-      <p>{{w.wallpost}}</p>
+      <p class="whitetext">{{w.wallpost}}</p>
       <p class="textal">{{w.date}}</p>
     </div><br>
   {% endfor %}

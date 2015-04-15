@@ -26,8 +26,8 @@
     height: 100%;
     margin-right: -300px;
     overflow-y: auto;
-    background: white;
-    border-left: 1px solid #d4d4d4;
+    background: #2e3d5e;
+    border-left: 1px solid #999999;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -58,10 +58,9 @@
     display: block;
     text-align: center;
     text-decoration: none;
-    color: black;
-    border-top: 1px solid #d4d4d4;
-    border-bottom: 1px solid #d4d4d4;
-    background: #fafafa;
+    color: #d4d4d4;
+    border-bottom: 1px solid #999999;
+    background: #2e3d5e;
 }
 
 .sidebar-nav li a:hover {
@@ -78,6 +77,8 @@
     padding-bottom: 15px;
     padding-top: 10px;
     text-align: center;
+    background: #151c2b;
+    border-bottom: 1px solid #999999;
 }
 
 .sidebar-nav > .sidebar-brand a {
