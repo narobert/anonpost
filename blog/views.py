@@ -14,7 +14,7 @@ from blog.models import Wpost, Ppost, Profile
 
 def home(request):
     total = 0
-    wallposts = Wpost.objects.all()
+    wallposts = Wpost.objects.all().order_by("-id")
     friends = User.objects.all()
     needclick = Ppost.objects.filter(user2 = request.user.id, clicked = False)
     allposts = Ppost.objects.filter(user2 = request.user.id)

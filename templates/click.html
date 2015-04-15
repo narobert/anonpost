@@ -8,9 +8,23 @@
 <br><br>
 
 <div class="container">
+  <p class="textal">{{profileposts.date}} by {{profileposts.user1.username}}</p>
   <div class="box">
-    <p class="whitetext">{{profileposts.profilepost}}</p>
-    <p class="textal">{{profileposts.date}} by {{profileposts.user1.username}}</p>
+    <div class="boxpost">
+      <p class="whitetext">{{profileposts.profilepost}}</p>
+    </div>
+    <div class="boxbuttons">
+      <div style="float:right;">
+        <center><p style="margin:0;"><img src="/static/images/up.png"></p>
+        <p style="margin:0;color:#d4d4d4;">55</p>
+        <p style="margin:0;"><img src="/static/images/down.png"></p></center>
+      </div>
+    </div>
+  </div>
+  <div class="commentbox">
+    <form method="POST" action="/post/" enctype="multipart/form-data" style="margin:0;">
+      <input class="input-block-level commentinput" id="textbox" type="text" name="wallpost" maxlength="1000" placeholder="Write a comment" required>
+    </form>
   </div><br>
 </div>
 

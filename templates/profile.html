@@ -18,22 +18,33 @@
     </div>
   </div>
   <br><br>
-  <div class="formcontainer">
-    <form method="POST" action="/postto/{{username}}/" enctype="multipart/form-data" style="margin:0;">
-      <textarea class="input-block-level lastinput" id="textbox" type="text" name="profilepost" maxlength="1000" placeholder="Post anonymously on {{username}}'s wall" required></textarea>
-      <div class="buttonbox"><p style="margin:0;text-align:right;"><button class="btn btn-default" id="orangebutton" name="submit" type="submit">Post</button></p></div>
-    </form>
-  </div>
-  <br><br>
+  <form method="POST" action="/postto/{{username}}/" enctype="multipart/form-data" style="margin-bottom:10px;">
+    <div class="formcontainer"><textarea class="input-block-level lastinput" id="textbox" type="text" name="profilepost" maxlength="1000" placeholder="Post anonymously to {{username}}'s wall" required></textarea></div>
+    <div class="buttonbox"><p style="margin:0;text-align:right;"><button class="btn btn-default" id="orangebutton" name="submit" type="submit">Post</button></p></div>
+  </form>
   </center>
   {% for p in profileposts %}
+    {% if user.username == p.user1.username %}
+      <p class="textal">{{p.date}} by {{p.user1.username}}</p>
+    {% else %}
+      <p class="textal">{{p.date}}</p>
+    {% endif %}
     <div class="box">
-      <p class="whitetext">{{p.profilepost}}</p>
-      {% if user.username == p.user1.username %}
-        <p class="textal">{{p.date}} by {{p.user1.username}}</p>
-      {% else %}
-        <p class="textal">{{p.date}}</p>
-      {% endif %}
+      <div class="boxpost">
+        <p class="whitetext">{{p.profilepost}}</p>
+      </div>
+      <div class="boxbuttons">
+        <div style="float:right;">
+          <center><p style="margin:0;"><img src="/static/images/up.png"></p>
+          <p style="margin:0;color:#d4d4d4;">55</p>
+          <p style="margin:0;"><img src="/static/images/down.png"></p></center>
+        </div>
+      </div>
+    </div>
+    <div class="commentbox">
+      <form method="POST" action="/post/" enctype="multipart/form-data" style="margin:0;">
+        <input class="input-block-level commentinput" id="textbox" type="text" name="wallpost" maxlength="1000" placeholder="Write a comment" required>
+      </form>
     </div><br>
   {% endfor %}
 </div>
