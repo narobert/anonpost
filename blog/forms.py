@@ -19,3 +19,9 @@ class WPostForm(forms.Form):
 
 class PPostForm(forms.Form):
     profilepost = forms.CharField(max_length = 1000)
+
+class WCommentForm(forms.Form):
+    wallcomment = forms.CharField(max_length = 500)
+
+class PCommentForm(forms.Form):
+    profilecomment = forms.CharField(max_length = 500)

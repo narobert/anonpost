@@ -20,6 +20,15 @@ input[type]:focus,
   box-shadow: none;
 }
 
+.commentslide {
+  display: none;
+}
+
+.commenticon {
+  display: inline-block;
+  margin-top: 25px;
+}
+
 #menu-toggle {
   text-decoration: none;
   color: #999999;
@@ -126,7 +135,7 @@ input[type]:focus,
   border: 1px solid #999999;
   background: #2e3d5e;
   padding-top: 15px;
-  padding-bottom: 11px;
+  padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 5px;
   display: block;
@@ -140,8 +149,9 @@ input[type]:focus,
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   display: block;
+  /*display: none;*/
 }
 
 .comments {
@@ -155,24 +165,35 @@ input[type]:focus,
   display: block;
 }
 
+  .comments:last-child {
+    padding-bottom: 30px;
+  }
+
+.cushion {
+  padding: 10px;
+  border-left: 1px solid #999999;
+  border-right: 1px solid #999999; 
+}
+
 .commentpost {
   color: #d4d4d4;
+  margin-bottom: 5px;
 }
 
 .commentdate {
   color: #777777;
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
 
 .boxpost {
   display: inline-block;
   vertical-align: top;
-  width: 90%;
+  width: 92%;
 }
 
 .boxbuttons {
   display: inline-block;
-  width: 9%;
+  width: 7%;
 }
 
 .together {
@@ -231,7 +252,7 @@ input[type]:focus,
 .textal {
   text-align: left;
   color: #777777;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .fullbutton {

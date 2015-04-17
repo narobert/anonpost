@@ -30,22 +30,165 @@
         <p class="whitetext">{{p.profilepost}}</p>
       </div>
       <div class="boxbuttons">
+        {% if p.hascomments == True %}
+        <div class="commenticon" id="getcomments{{p.id}}"><img id="commentimage{{p.id}}" src="/static/images/comment_blue.png"></div>
+        {% endif %}
         <div style="float:right;">
-          <center><p style="margin:0;"><img src="/static/images/up.png"></p>
-          <p style="margin:0;color:#d4d4d4;">55</p>
-          <p style="margin:0;"><img src="/static/images/down.png"></p></center>
+          <center><p style="margin:0;"><a id="like{{p.id}}" href="/likeprofile/{{p.id}}/"><img src="/static/images/up.png"></a></p>
+          <div id="likes_profile{{p.id}}"></div>
+          <p style="margin:0;"><a id="dislike{{p.id}}" href="/dislikeprofile/{{p.id}}/"><img src="/static/images/down.png"></a></p></center>
         </div>
       </div>
     </div>
+    <div class="commentslide" id="commentslider{{p.id}}">
+      <div id="comment_myprofile{{p.id}}"></div>
+    </div>
     <div class="commentbox">
-      <form method="POST" action="/post/" enctype="multipart/form-data" style="margin:0;">
-        <input class="input-block-level commentinput" id="textbox" type="text" name="wallpost" maxlength="1000" placeholder="Write a comment" required>
+      <form method="POST" action="/commentprofile/{{p.id}}/" enctype="multipart/form-data" style="margin:0;" id="formid{{p.id}}" data-id="{{p.id}}">
+        <input class="input-block-level commentinput commentfocus{{p.id}}" id="textbox" type="text" name="profilecomment" maxlength="500" placeholder="Write a comment" required>
       </form>
-    </div><br>
+    </div>
   {% endfor %}
 </div>
 
 {% endblock %}
 
 {% block extra-js %}
+
+<script>
+{% for p in profileposts %}
+
+$('#getcomments{{p.id}}').click(function() {
+    if ($("#commentimage{{p.id}}").attr("src") == "/static/images/comment_blue.png") {
+        loadComments({{p.id}});
+        $("#commentimage{{p.id}}").attr("src", "/static/images/comment.png");
+    }
+    else {
+        $("#commentimage{{p.id}}").attr("src", "/static/images/comment_blue.png");
+        $("#commentslider{{p.id}}").slideUp();
+    }
+});
+
+{% if p.hascomments == True %}
+$('.commentfocus{{p.id}}').focus(function() {
+    loadComments({{p.id}});
+    $("#commentimage{{p.id}}").attr("src", "/static/images/comment.png");
+});
+{% endif %}
+
+$('#formid{{p.id}}').live("submit", function(event) {
+    event.preventDefault();
+    $.ajax({
+        url: $('#formid{{p.id}}').attr('action'),
+        type: $('#formid{{p.id}}').attr('method'),
+        data: $('#formid{{p.id}}').serialize(),
+        success: function(data) {
+            loadComments($("#formid{{p.id}}").attr('data-id'));
+            $("#formid{{p.id}} input").val("");
+        }
+    });
+});
+
+$('#like{{p.id}}').live("click", function(event) {
+    event.preventDefault();
+    $.ajax({
+        url: $('#like{{p.id}}').attr('href'),
+        type: 'GET',
+        success: function(data) {
+            loadLikes();
+        }
+    });
+});
+
+$('#dislike{{p.id}}').live("click", function(event) {
+    event.preventDefault();
+    $.ajax({
+        url: $('#dislike{{p.id}}').attr('href'),
+        type: 'GET',
+        success: function(data) {
+            loadLikes();
+        }
+    });
+});
+
+{% endfor %}
+
+function load() {
+    loadLikes();
+}
+window.onload = load;
+
+function loadLikes() {
+    $.ajax({
+        url: "/ajax/blog/getLikesP",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            if (data["status"] == "OK") {
+                var likes = "";
+                for (var i = 0; i < data["profilelikes"].length; i++) {
+                    var like = data["profilelikes"][i];
+                    var like_id = like.id;
+                    var like_likes = like.likes;
+                    likes = "<p style='margin:0;color:#d4d4d4;'>" + like_likes + "</p>";
+                    $('#likes_profile' + like_id).html(likes);
+                }
+            }
+        },
+    });
+}
+
+function loadComments(id) {
+    $.ajax({
+        url: "/ajax/blog/getCommentsP",
+        data: ({ id: id }),
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            if (data["status"] == "OK") {
+                var comments = "";
+                for (var i = 0; i < data["profilecomments"].length; i++) {
+                    var comment = data["profilecomments"][i];
+                    var comment_comment = comment.profilecomment;
+                    var comment_date = comment.date;
+                    comments += "<div class='comments'><div class='commentident' style='display:inline-block;vertical-align:top;margin-top:5px;'><p style='color:#d4d4d4;margin-right:15px;'><img src='/static/images/comment.png'></p></div><div class='commentpoop' style='display:inline-block;'><p class='commentpost' style='display:inline-block;'>" + comment_comment + "</p><br><p class='commentdate' style='display:inline-block;'>" + comment_date + "</p></div></div>";
+                }
+                $('#comment_myprofile' + id).html(comments);
+                $('#commentslider' + id).slideDown();
+                //$('.commentbox').slideDown();
+            }
+        },
+    });
+}
+
+</script>
+
+
+<script type='text/javascript' src="/static/js/maintainscroll.jquery.js"></script>
+<script>
+
+// If cookie is set, scroll to the position saved in the cookie
+// Submit form, back to top of page
+//$(document).ready(function() {
+
+//    if ($.cookie("scroll") !== null) {
+  //      $(document).scrollTop($.cookie("scroll"));
+    //}
+
+//    $('#formid').live("submit", function() {
+  //      $.cookie("scroll", $(document).scrollTop());
+    //});
+
+//    $('#backtotop').live("click", function() {
+  //      $.cookie("scroll", $(document).scrollTop(0));
+    //});
+
+
+//    $('#clickprofile').live("click", function() {
+  //      $.cookie("scroll", $(document).scrollTop(0));
+    //});
+
+//});
+
+</script>
 {% endblock %}

@@ -17,6 +17,16 @@ urlpatterns = patterns('',
     url(r'^postto/(?P<username>[\w\-]+)/$', 'blog.views.postprofile', name='postprofile'),
     url(r'^profile/(?P<username>[\w\-]+)/$', 'blog.views.profile', name='profile'),
     url(r'^view/(?P<id>[\w\-]+)/$', 'blog.views.click', name='click'),
+    url(r'^commentwall/(?P<id>[\w\-]+)/$', 'blog.views.commentwall', name='commentwall'),
+    url(r'^commentprofile/(?P<id>[\w\-]+)/$', 'blog.views.commentprofile', name='commentprofile'),
+    url(r'^commentpost/(?P<id>[\w\-]+)/$', 'blog.views.commentpost', name='commentpost'),
+    url(r'^likewall/(?P<id>[\w\-]+)/$', 'blog.views.likewall', name='likewall'),
+    url(r'^dislikewall/(?P<id>[\w\-]+)/$', 'blog.views.dislikewall', name='dislikewall'),
+    url(r'^likeprofile/(?P<id>[\w\-]+)/$', 'blog.views.likeprofile', name='likeprofile'),
+    url(r'^dislikeprofile/(?P<id>[\w\-]+)/$', 'blog.views.dislikeprofile', name='dislikeprofile'),
+
+    # Trying out ajax comments
+    (r'^ajax/blog/', include('blog.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
