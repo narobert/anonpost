@@ -67,16 +67,16 @@ input[type]:focus,
 #orangebutton {
   background: #ff8800;
   text-shadow: none;
-  width: 10%;
+  width: 15%;
   color: white;
   border: none;
 }
 
 .slidebar {
   position: fixed;
-  z-index: 2000;
+  z-index: 1000;
   background: #151c2b; 
-  right: 300px;
+  right: 275px;
   top: 77px;
   padding: 2px 7px;
   border-top: 1px solid #999999;
@@ -133,6 +133,7 @@ input[type]:focus,
 
 .box {
   border: 1px solid #999999;
+  min-height: 70px;
   background: #2e3d5e;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -188,12 +189,12 @@ input[type]:focus,
 .boxpost {
   display: inline-block;
   vertical-align: top;
-  width: 92%;
+  width: 89%;
 }
 
 .boxbuttons {
   display: inline-block;
-  width: 7%;
+  width: 10%;
 }
 
 .together {
@@ -209,11 +210,18 @@ input[type]:focus,
   /*border: 10px solid #2e3d5e;*/
   position: relative;
   float: left;
-  width: 175px;
+  width: 145px;
   height: auto;
   box-shadow: 10px 10px 5px #2e3d5e;
   margin-right: 30px;
   margin-bottom: 30px;
+}
+
+.photo-icon {
+  border-radius: 4px;
+  width: auto;
+  height: 20px;
+  border: 1px solid #151c2b; 
 }
 
 .profilename {
@@ -268,11 +276,10 @@ input[type]:focus,
   margin-bottom: 10px;
 }
 
-.needclick {
-  color: black;
+.clicked {
+  color: #777777 !important;
 }
 
-.clicked {
-  background: #eeeeee;
-  color: black;
-}
+  .clicked:hover {
+    color: #d4d4d4 !important;
+  }

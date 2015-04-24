@@ -6,26 +6,26 @@
 {% block body %}
 
 <br><br><br>
-
-<div class="container">
   <form method="POST" action="/post/" enctype="multipart/form-data" style="margin-bottom:10px;">
     <div class="formcontainer"><textarea class="input-block-level lastinput" id="textbox" type="text" name="wallpost" maxlength="1000" placeholder="Post anonymously to everyone" required></textarea></div>
     <div class="buttonbox"><p style="margin:0;text-align:right;"><button class="btn btn-default" id="orangebutton" name="submit" type="submit">Post</button></p></div>
   </form>
   {% for w in wallposts %}
-    <p class="textal">{{w.date}}</p>
+    <p class="textal">{{w.timeremoved}} ago</p>
     <div class="box">
       <div class="boxpost">
         <p class="whitetext">{{w.wallpost}}</p>
       </div>
       <div class="boxbuttons">
         {% if w.hascomments == True %}
-        <div class="commenticon" id="getcomments{{w.id}}"><img id="commentimage{{w.id}}" src="/static/images/comment_blue.png"></div>
+        <div class="commenticon" id="getcomments{{w.id}}"><img id="commentimage{{w.id}}" src="/static/images/comment_d4.png"></div>
         {% endif %}
         <div style="float:right;">
-          <center><p style="margin:0;"><a id="like{{w.id}}" href="/likewall/{{w.id}}/"><img src="/static/images/up.png"></a></p>
-          <div id="likes_wall{{w.id}}"></div>
-          <p style="margin:0;"><a id="dislike{{w.id}}" href="/dislikewall/{{w.id}}/"><img src="/static/images/down.png"></a></p></center>
+          <center>
+            <div id="like_wall{{w.id}}"></div>
+            <div id="likes_wall{{w.id}}"></div>
+            <div id="dislike_wall{{w.id}}"></div>
+          </center>
         </div>
       </div>
     </div>
@@ -38,7 +38,6 @@
       </form>
     </div>
   {% endfor %}
-</div>
 
 {% endblock %}
 
@@ -48,12 +47,12 @@
 {% for w in wallposts %}
 
 $('#getcomments{{w.id}}').click(function() {
-    if ($("#commentimage{{w.id}}").attr("src") == "/static/images/comment_blue.png") {
+    if ($("#commentimage{{w.id}}").attr("src") == "/static/images/comment_d4.png") {
         loadComments({{w.id}});
         $("#commentimage{{w.id}}").attr("src", "/static/images/comment.png");
     }
     else {
-        $("#commentimage{{w.id}}").attr("src", "/static/images/comment_blue.png");
+        $("#commentimage{{w.id}}").attr("src", "/static/images/comment_d4.png");
         $("#commentslider{{w.id}}").slideUp();
     }
 });
@@ -84,7 +83,9 @@ $('#like{{w.id}}').live("click", function(event) {
         url: $('#like{{w.id}}').attr('href'),
         type: 'GET',
         success: function(data) {
+            loadLike();
             loadLikes();
+            loadDislike();
         }
     });
 });
@@ -95,7 +96,9 @@ $('#dislike{{w.id}}').live("click", function(event) {
         url: $('#dislike{{w.id}}').attr('href'),
         type: 'GET',
         success: function(data) {
+            loadLike();
             loadLikes();
+            loadDislike();
         }
     });
 });
@@ -103,9 +106,31 @@ $('#dislike{{w.id}}').live("click", function(event) {
 {% endfor %}
 
 function load() {
+    loadLike();
     loadLikes();
+    loadDislike();
 }
 window.onload = load;
+
+function loadLike() {
+    $.ajax({
+        url: "/ajax/blog/getLikeW",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            if (data["status"] == "OK") {
+                var likesw = "";
+                for (var i = 0; i < data["walllike"].length; i++) {
+                    var likew = data["walllike"][i];
+                    var likew_id = likew.wallid;
+                    var likew_color = likew.color;
+                    likesw = "<p style='margin:0;'><a id='like" + likew_id + "' href='/likewall/" + likew_id + "/'><img src='/static/images/" + likew_color + ".png'></a></p>";
+                    $('#like_wall' + likew_id).html(likesw);
+                }
+            }
+        },
+    });
+}
 
 function loadLikes() {
     $.ajax({
@@ -127,6 +152,26 @@ function loadLikes() {
     });
 }
 
+function loadDislike() {
+    $.ajax({
+        url: "/ajax/blog/getDislikeW",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            if (data["status"] == "OK") {
+                var dislikesw = "";
+                for (var i = 0; i < data["walldislike"].length; i++) {
+                    var dislikew = data["walldislike"][i];
+                    var dislikew_id = dislikew.wallid;
+                    var dislikew_color = dislikew.color;
+                    dislikesw = "<p style='margin:0;'><a id='dislike" + dislikew_id + "' href='/dislikewall/" + dislikew_id + "/'><img src='/static/images/" + dislikew_color + ".png'></a></p>";
+                    $('#dislike_wall' + dislikew_id).html(dislikesw);
+                }
+            }
+        },
+    });
+}
+
 function loadComments(id) {
     $.ajax({
         url: "/ajax/blog/getCommentsW",
@@ -140,7 +185,7 @@ function loadComments(id) {
                     var comment = data["wallcomments"][i];
                     var comment_comment = comment.wallcomment;
                     var comment_date = comment.date;
-                    comments += "<div class='comments'><div class='commentident' style='display:inline-block;vertical-align:top;margin-top:5px;'><p style='color:#d4d4d4;margin-right:15px;'><img src='/static/images/comment.png'></p></div><div class='commentpoop' style='display:inline-block;'><p class='commentpost' style='display:inline-block;'>" + comment_comment + "</p><br><p class='commentdate' style='display:inline-block;'>" + comment_date + "</p></div></div>";
+                    comments += "<div class='comments'><div class='commentident' style='display:inline-block;vertical-align:top;margin-top:5px;'><p style='color:#d4d4d4;margin-right:15px;'><img src='/static/images/comment.png'></p></div><div class='commentpoop' style='display:inline-block;'><p class='commentpost' style='display:inline-block;'>" + comment_comment + "</p><br><p class='commentdate' style='display:inline-block;'>" + comment_date + " ago</p></div></div>";
                 }
                 $('#comment_wall' + id).html(comments);
                 $('#commentslider' + id).slideDown();

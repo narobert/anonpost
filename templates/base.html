@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Friendspeak | Anonymous social network among friends</title>
+    <title>FriendSpeak | Anonymous social network among friends</title>
 
     <!-- Bootstrap -->
     <link type='text/css' href="/static/css/bootstrap.css" rel="stylesheet" />
@@ -27,24 +27,31 @@
   </head>
 
   <body>
+
+    {% load humanize %}
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">Friend<font style="color:#f90;">speak</font></a>
+        <div class="container-fluid">
+          <a class="brand" href="/">Friend<font style="color:#f90;">Speak</font></a>
           <ul class="nav pull-right">
 
             {% if user.is_authenticated %}
+            <li><a class="photoadjust" href="/myprofile/"><img class="photo-icon" src="/static/images/nick_prof.jpg">&nbsp;&nbsp;&nbsp;{{user.username}}</a></li>
             <li class="dropdown">
-              <a data-toggle="dropdown" style="cursor:pointer;">{{user.username}} ({{total}})</a>
+              {% if total > 0 %}
+              <a data-toggle="dropdown" style="cursor:pointer;"><img src="/static/images/message.png">&nbsp;&nbsp;<font style="color:#f90;">{{total}}</font></a>
+              {% else %}
+              <a data-toggle="dropdown" style="cursor:pointer;"><img src="/static/images/message.png"></a>
+              {% endif %}
               <ul class="dropdown-menu">
                 {% for a in allposts %}
                   {% if a.clicked == False %}
-                    <li class="needclick"><a href="/view/{{a.id}}/">post by {{a.user1.username}}</a></li>
+                    <li><a class="needclick" href="/view/{{a.id}}/">{{a.user1.username}} posted to your wall</a></li>
                   {% else %}
-                    <li class="clicked"><a href="/view/{{a.id}}/">post by {{a.user1.username}}</a></li>
+                    <li><a class="clicked" href="/view/{{a.id}}/">{{a.user1.username}} posted to your wall</a></li>
                   {% endif %}
                 {% endfor %}
-                <li><a href="/myprofile/">view my profile</a></li>
                 <li><a href="/logout/">logout</a></li>
               </ul>
             </li>
@@ -86,13 +93,15 @@
           {% endfor %}
         </ul>
       </div>
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          {% block body %}
+          {% endblock %}
+        </div>
+      </div>
     </div>
     {% else %}
     {% endif %}
-
-
-    {% block body %}
-    {% endblock %}
 
     {% block extra-js %}
     {% endblock %}

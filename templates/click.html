@@ -6,18 +6,26 @@
 {% block body %}
 
 <br><br>
-
-<div class="container">
-  <p class="textal">{{profileposts.date}} by {{profileposts.user1.username}}</p>
+  <p class="textal">{{profileposts.timeremoved}} ago by {{profileposts.user1.username}}</p>
   <div class="box">
     <div class="boxpost">
       <p class="whitetext">{{profileposts.profilepost}}</p>
     </div>
     <div class="boxbuttons">
       <div style="float:right;">
-        <center><p style="margin:0;"><a href="/likeprofile/{{profileposts.id}}/"><img src="/static/images/up.png"></a></p>
-        <p style="margin:0;color:#d4d4d4;">{{profileposts.likes}}</p>
-        <p style="margin:0;"><a href="/dislikeprofile/{{profileposts.id}}/"><img src="/static/images/down.png"></a></p></center>
+        <center>
+          {% if like.color == 0 %}
+          <p style="margin:0;"><a href="/likeprofile/{{profileposts.id}}/"><img src="/static/images/0.png"></a></p>
+          {% else %}
+          <p style="margin:0;"><a href="/likeprofile/{{profileposts.id}}/"><img src="/static/images/1.png"></a></p>
+          {% endif %}
+          <p style="margin:0;color:#d4d4d4;">{{profileposts.likes}}</p>
+          {% if dislike.color == 10 %}
+          <p style="margin:0;"><a href="/dislikeprofile/{{profileposts.id}}/"><img src="/static/images/10.png"></a></p>
+          {% else %}
+          <p style="margin:0;"><a href="/dislikeprofile/{{profileposts.id}}/"><img src="/static/images/11.png"></a></p>
+          {% endif %}
+        </center>
       </div>
     </div>
   </div>
@@ -28,7 +36,7 @@
     </div>
     <div class="commentpoop" style="display:inline-block;">
       <p class="commentpost" style="display:inline-block;">{{c.profilecomment}}</p><br>
-      <p class="commentdate" style="display:inline-block;">{{c.date}}</p>
+      <p class="commentdate" style="display:inline-block;">{{c.timeremoved}} ago</p>
     </div>
   </div>
   {% endfor %}
@@ -40,7 +48,6 @@
       <input class="input-block-level commentinput" id="textbox" type="text" name="profilecomment" maxlength="500" placeholder="Write a comment" required>
     </form>
   </div>
-</div>
 
 {% endblock %}
 
