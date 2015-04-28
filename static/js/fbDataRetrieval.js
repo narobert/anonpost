@@ -47,7 +47,7 @@
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
                    console.log('users birthday:'+response.birthday);    
-                   document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+                   //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
                    
                    //age calculation script
                     function agefinding()
