@@ -1,1 +1,1 @@
-web: gunicorn linerub.wsgi
+web: gunicorn anonpost.wsgi

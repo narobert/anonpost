@@ -6,10 +6,14 @@
 {% block body %}
 
 <br><br>
-  <p class="textal">{{profileposts.timeremoved}} ago by {{profileposts.user1.username}}</p>
   <div class="box">
     <div class="boxpost">
       <p class="whitetext">{{profileposts.profilepost}}</p>
+      {% if user.username == profileposts.user1.username %}
+      <p class="textal"><img class="photo-post" src="/static/images/nick_prof.jpg">{{profileposts.timeremoved}} ago</p>
+      {% else %}
+      <p class="textal">{{profileposts.timeremoved}} ago</p>
+      {% endif %}
     </div>
     <div class="boxbuttons">
       <div style="float:right;">
@@ -32,7 +36,11 @@
   {% for c in profilecomments %}
   <div class="comments">
     <div class="commentident" style="display:inline-block;vertical-align:top;margin-top:5px;">
+      {% if user.username = c.user.username %}
+      <p style="color:#d4d4d4;margin-right:15px;"><img class="photo-comment" src="/static/images/nick_prof.jpg"></p>
+      {% else %}
       <p style="color:#d4d4d4;margin-right:15px;"><img src="/static/images/comment.png"></p>
+      {% endif %}
     </div>
     <div class="commentpoop" style="display:inline-block;">
       <p class="commentpost" style="display:inline-block;">{{c.profilecomment}}</p><br>
@@ -40,12 +48,9 @@
     </div>
   </div>
   {% endfor %}
-  {% if profileposts.hascomments == True %}
-    <div class="cushion"></div>
-  {% endif %}
   <div class="commentbox">
     <form method="POST" action="/commentpost/{{profileposts.id}}/" enctype="multipart/form-data" style="margin:0;" id="formid">
-      <input class="input-block-level commentinput" id="textbox" type="text" name="profilecomment" maxlength="500" placeholder="Write a comment" required>
+      <input class="input-block-level commentinput" id="textbox" type="text" name="profilecomment" maxlength="500" placeholder="Write a comment..." required>
     </form>
   </div>
 

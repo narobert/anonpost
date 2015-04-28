@@ -46,7 +46,7 @@ class Wcomment(models.Model):
   user = models.ForeignKey(User)
 
   def for_json(self):
-      return {"wallcomment": self.wallcomment, "date": timesince(self.date).split(', ')[0]}
+      return {"usercomment": self.user.username, "wallcomment": self.wallcomment, "date": timesince(self.date).split(', ')[0]}
 
 class Pcomment(models.Model):
   id = models.AutoField('#', primary_key=True)
@@ -56,7 +56,7 @@ class Pcomment(models.Model):
   user = models.ForeignKey(User)
 
   def for_json(self):
-      return {"profilecomment": self.profilecomment, "date": timesince(self.date).split(', ')[0]}
+      return {"usercomment": self.user.username, "profilecomment": self.profilecomment, "date": timesince(self.date).split(', ')[0]}
 
   def timeremoved(self):
       return timesince(self.date).split(', ')[0]
