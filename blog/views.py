@@ -16,16 +16,16 @@ import simplejson as json
 
 def home(request):
     total = 0
-    wallposts = Wpost.objects.all().order_by("-id")
-    wallcomments = Wcomment.objects.all().order_by("-id")
     friends = User.objects.all()
+    profileposts = Ppost.objects.filter(user2 = request.user.id).order_by("-id")
+    profilecomments = Pcomment.objects.filter(profile = profileposts).order_by("-id")
     needclick = Ppost.objects.filter(user2 = request.user.id, clicked = False).order_by("-id")
     allposts = Ppost.objects.filter(user2 = request.user.id).order_by("-id")
     for n in needclick:
         total = total + 1
     if not request.user.is_authenticated():
         return render_to_response("register.html")
-    return render_to_response("home.html", {"user": request.user, "friends": friends, "wallposts": wallposts, "allposts": allposts, "total": total, "wallcomments": wallcomments})
+    return render_to_response("home.html", {"user": request.user, "friends": friends, "profileposts": profileposts, "profilecomments": profilecomments, "allposts": allposts, "total": total})
 
 
 def click(request, id):
@@ -48,16 +48,16 @@ def click(request, id):
 
 def myprofile(request):
     total = 0
+    wallposts = Wpost.objects.all().order_by("-id")
+    wallcomments = Wcomment.objects.all().order_by("-id")
     friends = User.objects.all()
-    profileposts = Ppost.objects.filter(user2 = request.user.id).order_by("-id")
-    profilecomments = Pcomment.objects.filter(profile = profileposts).order_by("-id")
     needclick = Ppost.objects.filter(user2 = request.user.id, clicked = False).order_by("-id")
     allposts = Ppost.objects.filter(user2 = request.user.id).order_by("-id")
     for n in needclick:
         total = total + 1
     if not request.user.is_authenticated():
         return render_to_response("register.html")
-    return render_to_response("myprofile.html", {"user": request.user, "friends": friends, "profileposts": profileposts, "profilecomments": profilecomments, "allposts": allposts, "total": total})
+    return render_to_response("myprofile.html", {"user": request.user, "friends": friends, "wallposts": wallposts, "allposts": allposts, "total": total, "wallcomments": wallcomments})
 
 
 def profile(request, username):

@@ -46,8 +46,12 @@
                 function (response) {
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
+<<<<<<< HEAD
                    console.log('users birthday:'+response.birthday);    
                    //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+=======
+                   console.log('users birthday:'+ response.birthday);
+>>>>>>> 88f73c1a3dd81a4837ff65686212ba94336a2fa4
                    
                    //age calculation script
                     function agefinding()
@@ -79,7 +83,7 @@
                   profilePicture.appendChild(profilePic);                   
                   profileName.innerHTML = name;
                   profileLocale.innerHTML = locale;
-                  profileAge.innerHTML = age+" years old";
+                  profileAge.innerHTML = age +" years old";
                 }                
             });
 
