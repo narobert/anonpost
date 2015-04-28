@@ -28,6 +28,10 @@
 
   <body>
 
+    <script type='text/javascript' src="/static/js/fbAuthLogin.js"></script>
+
+    <div id="fb-root"></div>
+
     {% load humanize %}
 
     <div class="navbar navbar-fixed-top">
@@ -57,10 +61,10 @@
               </ul>
             </li>
             {% else %}
-            <form method="post" action="/login/" style="margin:0;">
-              <input type="text" name="username" maxlength="254" placeholder="Username" required>
-              <input type="password" name="password" maxlength="4096" placeholder="Password" required>
-              <button class="btn" name="submit" type="submit">Sign in</button>
+            <form method="post" action="/login/" style="margin:0;" id="loginForm">
+              <input type="text" name="username" id="profileUserID" maxlength="254" placeholder="Username" required>
+              <input type="password" name="password" id="password" maxlength="4096" placeholder="Password" required>
+              <button class="btn" name="submitButton" type="submit">Sign in</button>
             </form>
             {% endif %}
 
@@ -96,6 +100,7 @@
       </div>
       <div id="page-content-wrapper">
         <div class="container-fluid">
+          <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true" scope="user_birthday,user_about_me,user_location,user_friends"></div>
           {% block body %}
           {% endblock %}
         </div>

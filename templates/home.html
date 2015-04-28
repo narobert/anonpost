@@ -1,4 +1,101 @@
 {% extends "base.html" %}
+<!--
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>Bullpost | Anonymous social network -home</title>
+
+    <!-- Bootstrap --
+    <link type='text/css' href="/css/bootstrap.css" rel="stylesheet" />
+    <link type='text/css' href="/css/style.css" rel="stylesheet" />
+    <link type='text/css' href="/css/simple-sidebar.css" rel="stylesheet" />
+-->
+    {% block css %}
+    {% endblock %}
+<!--
+    <style>
+    body {
+      font-family: Baskerville, serif !important;
+      padding-top: 40px;
+    }
+    </style>
+
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+  </head>
+--
+<body>
+-->
+{% block body %}
+<!--inititalizing facebook SDK-->
+<script type='text/javascript' src="/static/js/fbDataRetrieval.js"></script>
+<br><br>
+
+<!--FB.root-->
+<div id="fb-root"></div> 
+
+<br><br>
+  <center>
+<div class="container">
+  <div class="together">
+    <div id="profilePicture"></div>
+    <br>
+      <!--shows like and share buttons-->
+      <div
+       class="fb-like"
+       data-share="true"
+       data-width="450"
+       data-show-faces="true">
+      </div>     
+    <br>
+    <div class="togetheragain">
+    <!--html tags to display retrieved fb info-->
+      <div id="profileName"></div>
+      <div id="profileLocation"></div>
+      <div id="profileLocale"></div>
+      <div id="profileBio"></div>
+       <div id="profileAge"></div>
+      <div id="friendPicture"></div>
+
+       
+    </div>
+  </div>
+  <br><br>
+    <form method="POST" action="/submit/{{user.username}}/" enctype="multipart/form-data">
+      <textarea class="input-block-level lastinput" type="text" name="wallpost" maxlength="1000" placeholder="Post anonymously on {{user.username}}'s wall" required></textarea>
+      <p><button class="btn btn-default input-block-level" name="submit" type="submit">Post</button></p>
+    </form>
+  <br><br>
+  {% for p in posts %}
+    <p class="textal">Posted {{p.date}} by {{p.user1.username}}</p>
+    <div class="box">
+      <p>{{p.wall}}</p>
+    </div><br>
+  {% endfor %}
+  </center>
+</div>
+
+<!---
+  </body>
+</html>
+-->
+{% endblock %}
+
+
+{% block extra-js %}
+{% endblock %}
+
+
+
+
+
+
+
+<!--{% extends "base.html" %}
 
 {% block css %}
 {% endblock %}
@@ -212,4 +309,4 @@ function loadComments(id) {
 }
 </script>
 
-{% endblock %}
+{% endblock %}-->
