@@ -9,7 +9,7 @@
   FB.Event.subscribe('auth.login', function (response) {
       //where redirect occurs upon login (also occurs if user not fb logged in refreshes page after being logged in) (needs to stay as is)
       console.log('fb.event.subscribe 1; response:'+JSON.stringify(response));
-      window.location = "http://bullpostcorbin.herokuapp.com";
+      window.location = "https://friendspeak.herokuapp.com";
  });
 
   FB.getLoginStatus(function(response) {
@@ -18,7 +18,7 @@
           statusChangeCallback(response);
       }else{
         console.log('user is not logged into facebook ');
-        window.location = "http://bullpostcorbin.herokuapp.com/logout/";
+        window.location = "https://friendspeak.herokuapp.com/logout/";
       } 
   });
 

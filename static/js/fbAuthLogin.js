@@ -37,7 +37,7 @@ window.fbAsyncInit = function() {
     version    : 'v2.3' 
   });
   FB.Event.subscribe('auth.login', function (response) {
-      window.location = "http://bullpostcorbin.herokuapp.com";
+      window.location = "https://friendspeak.herokuapp.com";
  });
 
   FB.getLoginStatus(function(response) {
@@ -95,7 +95,7 @@ console.log('userInformation ');
                     console.log('all permissions granted');
                   }
                   if(response.status == 'connected'){
-                    window.location = "http://bullpostcorbin.herokuapp.com";
+                    window.location = "https://friendspeak.herokuapp.com";
                   }
                 }  
                 
