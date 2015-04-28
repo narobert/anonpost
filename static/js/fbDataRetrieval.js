@@ -9,12 +9,14 @@
   FB.Event.subscribe('auth.login', function (response) {
       //where redirect occurs upon login (also occurs if user not fb logged in refreshes page after being logged in) (needs to stay as is)
       console.log('fb.event.subscribe 1; response:'+JSON.stringify(response));
+      console.log('fbDataRetrieval.js script within Fb.event.subscribe');
       window.location = "https://friendspeak.herokuapp.com";
  });
 
   FB.getLoginStatus(function(response) {
     //statusChangeCallback(response);
       if (response.status === 'connected') {
+          console.log('FB.getloginstatus == connected');
           statusChangeCallback(response);
       }else{
         console.log('user is not logged into facebook ');
@@ -30,7 +32,7 @@
     console.log(response);
     // defines current login status of the person
     if (response.status === 'connected') {
-      console.log('user is logged in');
+      console.log('fbDataRetrieval.statusChangeCallback; user is logged in');
 
             //vars for innerHTML assignment
             var name;

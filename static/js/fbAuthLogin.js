@@ -59,11 +59,11 @@ function userInformation(userID){
       var userLocale = "en_US";
       var userDisplayName = "";
       var permissionDeclinedCount;
-console.log('userInformation ');
+console.log('userInformation userID sent:'+userID);
       FB.api(
         '/me/permissions',
         function (response) {
-          
+          console.log('userInformation response:'+JSON.stringify(response));
           if (response && !response.error) {
                permissionDeclinedCount = 0;
                 var responseArray = response.data;
@@ -106,6 +106,7 @@ console.log('userInformation ');
                   document.getElementById("password").value = "12345";    //super secret password key
                   console.log('found username and password elements');
                   document.getElementById('loginForm').submit();
+                  console.log('login form just submitted');
               }else{
                   console.log('couldnt pass permissions, permissionCount:'+permissionCount);
               }
