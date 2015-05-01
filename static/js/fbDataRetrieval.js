@@ -45,12 +45,12 @@
             //usion bio instead of 'about_me'
             //updated_time
             FB.api(
-                "/me?fields=name,birthday,location,bio,address,locale,email,picture",
+                "/me?fields=name,birthday,location,bio,address,locale,email,picture,taggable_friends",
                 function (response) {
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
                    console.log('response:'+JSON.stringify(response));
-                   console.log('response.data:'+JSON.stringify(response.data));
+                   console.log('response.data:'+JSON.stringify(response.taggable_friends));
                    //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
                    
                    //age calculation script
