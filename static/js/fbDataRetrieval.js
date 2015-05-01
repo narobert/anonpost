@@ -76,7 +76,8 @@
                   profilePic.src = 'https://graph.facebook.com/'+response.id+'/picture?width=200';
                   console.log('fbDataRetrieval profileName:'+name);
                   //var profileName = document.getElementById("profileName");
-                  var profileName = document.forms['setUserInformation'].elements["profileUserID"].value= name;
+                  document.getElementById["profileUserID"].innerHTML= name;
+                  document.getElementById["profileName"].innerHTML=name;
                   //var profileLocale = document.getElementById("profileLocale");
                   //var profilePicture= document.getElementById("profilePicture");
                   //var profileAge= document.getElementById("profileAge");
