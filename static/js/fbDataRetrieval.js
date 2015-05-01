@@ -41,8 +41,9 @@
             var profilePic = document.createElement('img');
 
             //grabs user name and birthday 
+            //  taggable_friends&fields=id,name,picture.type(large)
             FB.api(
-                "/me?fields=name,birthday,location,about_me,taggable_friends&fields=id,name,picture.type(large)",
+                "/me?fields=name,birthday,location,about_me",
                 function (response) {
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
