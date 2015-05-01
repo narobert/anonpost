@@ -107,52 +107,52 @@
 
               //for empty path (before facebook review) return is: {"error":{"message":"Unknown path components: /about_me","type":"OAuthException","code":2500}}"
           
-          var bio = "unset bio";
-          FB.api("/me/about_me",
-            function(response) {
-              if (response && !response.error) {
-                bio = response.data;
-              }
-              var profileBio = document.getElementById("profileBio");
-              profileBio.innerHTML = bio;
-              console.log('user about me:'+JSON.stringify(response));
-              //for empty path return is: {"error":{"message":"Unknown path components: /about_me","type":"OAuthException","code":2500}}"
-            }
-          );
-           FB.api("/me/permissions",
-            function(response) {
-              console.log('permissions requests length:'+response.data.length);
-            }
-          );
-          FB.api("/me/friends",
-            function(response) {
-              console.log('friends using app:'+JSON.stringify(response.data));
-            }
-          );
+          //var bio = "unset bio";
+          //FB.api("/me/about_me",
+            //function(response) {
+              //if (response && !response.error) {
+                //bio = response.data;
+              //}
+              //var profileBio = document.getElementById("profileBio");
+              //profileBio.innerHTML = bio;
+              //console.log('user about me:'+JSON.stringify(response));
+              ////for empty path return is: {"error":{"message":"Unknown path components: /about_me","type":"OAuthException","code":2500}}"
+            //}
+          //);
+           //FB.api("/me/permissions",
+            //function(response) {
+              //console.log('permissions requests length:'+response.data.length);
+            //}
+          //);
+          //FB.api("/me/friends",
+            //function(response) {
+              //console.log('friends using app:'+JSON.stringify(response.data));
+            //}
+          //);
 
-          var friendsIDarray = [];
-          var user_friends_list;
-          var friendPic= document.createElement('img');
+          //var friendsIDarray = [];
+          //var user_friends_list;
+          //var friendPic= document.createElement('img');
           
-          FB.api("/me/taggable_friends?fields=id,name,picture.type(large)",
-            function(response) {
-              console.log('taggable_friends length:'+response.data.length);
-              if (response && !response.error) {
-                var numberOfTaggableFriends = response.data.length;
-                if (response.data.length > 0) {
-                  for (var i = 0; i < numberOfTaggableFriends; i++) {
-                     var data = response.data;
-                     //console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
-                     friendsIDarray.push(data[i].id);
-                  }
-                  user_friends_list = friendsIDarray.join();
-                  console.log('user_friends_list [length]:'+user_friends_list.length);
-                  return;
-                }else{
-                  console.log('taggable_friends data array is empty');
-                }
-              }              
-          });
+          //FB.api("/me/taggable_friends?fields=id,name,picture.type(large)",
+            //function(response) {
+              //console.log('taggable_friends length:'+response.data.length);
+              //if (response && !response.error) {
+                //var numberOfTaggableFriends = response.data.length;
+                //if (response.data.length > 0) {
+                  //for (var i = 0; i < numberOfTaggableFriends; i++) {
+                     //var data = response.data;
+                     ////console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
+                     //friendsIDarray.push(data[i].id);
+                  //}
+                  //user_friends_list = friendsIDarray.join();
+                  //console.log('user_friends_list [length]:'+user_friends_list.length);
+                  //return;
+                //}else{
+                  //console.log('taggable_friends data array is empty');
+                //}
+              //}              
+          //});
           
           
     }else if (response.status === 'not_authorized') {
