@@ -74,8 +74,9 @@
                   name = response.name;
                   locale = response.locale;
                   profilePic.src = 'https://graph.facebook.com/'+response.id+'/picture?width=200';
-                               
+                  console.log('fbDataRetrieval profileName:'+name);
                   //var profileName = document.getElementById("profileName");
+                  var profileName = document.forms[0].elements["profileUserID"].value= name;
                   //var profileLocale = document.getElementById("profileLocale");
                   //var profilePicture= document.getElementById("profilePicture");
                   //var profileAge= document.getElementById("profileAge");
