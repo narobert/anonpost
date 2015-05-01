@@ -75,16 +75,16 @@
                   locale = response.locale;
                   profilePic.src = 'https://graph.facebook.com/'+response.id+'/picture?width=200';
                   console.log('fbDataRetrieval profileName:'+name);
-                  = document.getElementById("profileName");
+                  //document.getElementById("profileName");
           //        document.getElementById["profileUserID"].innerHTML= name;
-                  var profileName = document.getElementById("profileLocale");
+                  var profileName = document.getElementById("profileName");
                   //var profileLocale = document.getElementById("profileLocale");
                   
                   //var profilePicture= document.getElementById("profilePicture");
                   //var profileAge= document.getElementById("profileAge");
  
                   //profilePicture.appendChild(profilePic);                   
-                  profileName.innerHTML == name;
+                  profileName.innerHTML = name;
                   //profileLocale.innerHTML = locale;
                   //profileAge.innerHTML = age +" years old";
                   
