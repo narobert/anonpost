@@ -32,7 +32,7 @@
     console.log(response);
     // defines current login status of the person
     if (response.status === 'connected') {
-      console.log('fbDataRetrieval.statusChangeCallback; user is logged in');
+      console.log('fbDataRetrieval.statusChangeCallback; user is logged in, calling for locale, birthday, bio, profilepicturelink, taggable friends, permissions, friends');
 
             //vars for innerHTML assignment
             var name;
@@ -42,11 +42,12 @@
 
             //grabs user name and birthday 
             FB.api(
-                "/me",
+                "/me?fields=name,birthday,location,about_me,taggable_friends.fields=id,name,picture.type(large)",
                 function (response) {
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
-                   console.log('users birthday:'+response.birthday);    
+                   console.log('response:'+JSON.stringify(response));
+                   console.log('response.data:'+JSON.stringify(response.data));
                    //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
                    
                    //age calculation script
@@ -80,21 +81,26 @@
                   profileName.innerHTML = name;
                   profileLocale.innerHTML = locale;
                   profileAge.innerHTML = age +" years old";
+                  
+                  
+                  //getting/setting location
+                  if(response.location != 'undefined' && response.location != 'unknown'){
+                    var location = response.location;
+                  }else{
+                    var location = "unknown";
+                  }
+                  var profileLocation = document.getElementById("profileLocation");
+                  profileLocation.innerHTML = location;
+
+                  //getting/setting about_me
+                  //getting/setting taggable_friends.fields=id,name,picture.type(large)",
+             
+                  
                 }                
             });
 
-          var location = "unkown";
-          FB.api("/me/location",
-            function(response) {
-              if (response && !response.error) {
-                location = response.data;
-              }
-              var profileLocation = document.getElementById("profileLocation");
-              profileLocation.innerHTML = location;
-              console.log('fb. api location of user:'+JSON.stringify(response));
+
               //for empty path (before facebook review) return is: {"error":{"message":"Unknown path components: /about_me","type":"OAuthException","code":2500}}"
-            }
-          );
           
           var bio = "unset bio";
           FB.api("/me/about_me",
