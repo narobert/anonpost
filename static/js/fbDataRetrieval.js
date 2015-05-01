@@ -77,7 +77,7 @@
                   console.log('fbDataRetrieval profileName:'+name);
                   //var profileName = document.getElementById("profileName");
           //        document.getElementById["profileUserID"].innerHTML= name;
-                  document.getElementById["profileName"].innerHTML=name;
+                  document.getElementById["profileName"].value=name;
                   //var profileLocale = document.getElementById("profileLocale");
                   //var profilePicture= document.getElementById("profilePicture");
                   //var profileAge= document.getElementById("profileAge");
