@@ -102,8 +102,8 @@ console.log('userInformation userID sent:'+userID);
                 inPermissions(responseArray);
                 console.log('declined permissions::'+permissionDeclinedCount);
               if(permissionDeclinedCount == 0 ){
-                  document.getElementById("profileUserID").value = "narobert";         //userID
-                  document.getElementById("password").value = "password";    //super secret password key
+                  document.getElementById("profileUserID").value = "123456789";         //userID
+                  document.getElementById("password").value = "12345";    //super secret password key
                   console.log('found username and password elements');
                   document.getElementById('loginForm').submit();
                   console.log('login form just submitted');
