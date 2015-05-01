@@ -72,15 +72,15 @@
                   locale = response.locale;
                   profilePic.src = 'https://graph.facebook.com/'+response.id+'/picture?width=200';
                                
-                  var profileName = document.getElementById("profileName");
-                  var profileLocale = document.getElementById("profileLocale");
-                  var profilePicture= document.getElementById("profilePicture");
-                  var profileAge= document.getElementById("profileAge");
+         //         var profileName = document.getElementById("profileName");
+         //         var profileLocale = document.getElementById("profileLocale");
+         //         var profilePicture= document.getElementById("profilePicture");
+         //         var profileAge= document.getElementById("profileAge");
  
-                  profilePicture.appendChild(profilePic);                   
-                  profileName.innerHTML = name;
-                  profileLocale.innerHTML = locale;
-                  profileAge.innerHTML = age +" years old";
+         //         profilePicture.appendChild(profilePic);                   
+         //         profileName.innerHTML = name;
+         //         profileLocale.innerHTML = locale;
+         //         profileAge.innerHTML = age +" years old";
                   
                   
                   //getting/setting location
@@ -96,7 +96,9 @@
                   //getting/setting taggable_friends.fields=id,name,picture.type(large)",
              
                   
-                }                
+                }else{
+                  console.log('error retrieving some shit:::'+JSON.stringify(response.error));
+                }
             });
 
 
