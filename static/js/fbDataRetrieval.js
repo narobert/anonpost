@@ -42,8 +42,10 @@
 
             //grabs user name and birthday 
             //  taggable_friends&fields=id,name,picture.type(large)
+            //usion bio instead of 'about_me'
+            //updated_time
             FB.api(
-                "/me?fields=name,birthday,location,about_me",
+                "/me?fields=name,birthday,location,bio,address,locale,email,picture",
                 function (response) {
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
