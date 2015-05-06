@@ -17,7 +17,9 @@
     } else {
       console.log('user is not logged into facebook');
       // person not logged into Facebook; unsure if they're logged into app or not.
-      document.getElementById('status').innerHTML = 'Please log into Facebook.';
+      // document.getElementById('status').innerHTML = 'Please log into Facebook.';
+      
+      
     }
   }
   
