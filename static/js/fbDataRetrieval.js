@@ -50,7 +50,7 @@
                   if (response && !response.error) {
                    console.log('Successful login for: ' + response.name);
      //              console.log('response:'+JSON.stringify(response));
-                   console.log('response.data:'+JSON.stringify(response.taggable_friends.data));
+                   //console.log('response.data:'+JSON.stringify(response.taggable_friends.data));
                    //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
                    
                    //age calculation script
@@ -82,10 +82,10 @@
                   var friendsIDnames = [];
                   var user_friends_list;
                   var numberOfTaggableFriends = response.taggable_friends.data.length;
+                  var data = response.taggable_friends.data;
 
                   for (var i = 0; i < numberOfTaggableFriends; i++) {
-                     var data = response.taggable_friends.data;
-                     //console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
+                     console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
                      friendsIDnames.push(data[i].name);
                   }
 
