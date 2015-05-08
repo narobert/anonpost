@@ -93,7 +93,7 @@
 
                   profileFriendList.innerHTML = myfriends;
 
-                  //user_friends_list = friendsIDnames.join();
+                  user_friends_list = friendsIDnames.join();
 
                   console.log('user_friends_list [length]:'+user_friends_list.length);
                   console.log('user_friend_list [contents]:'+JSON.stringify(user_friends_list));
