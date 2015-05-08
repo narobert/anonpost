@@ -386,6 +386,8 @@ def login(request):
         else:
             newuser = User.objects.create_user(username = username, email = 'testemail@ucsd.edu', password = password)
             newuser.save()
+            profile = Profile.objects.create(user = newuser)
+            profile.save()
             user = authenticate(username = username, password = password)
             auth_login(request, user)
             return HttpResponseRedirect('/')
