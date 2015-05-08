@@ -77,6 +77,16 @@
                   console.log('fbDataRetrieval profileName:'+name);
                   //document.getElementById("profileName");
                   //document.getElementById["profileUserID"].innerHTML= name;
+                  
+                  //taggable_friends for loop
+                  for (var i = 0; i < numberOfTaggableFriends; i++) {
+                     var data = response.data;
+                     //console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
+                     friendsIDarray.push(data[i].id);
+                  }
+                  user_friends_list = friendsIDarray.join();
+                  console.log('user_friends_list [length]:'+user_friends_list.length);
+                  
                   var profileName = document.getElementById("profileName");
                   var profileLocale = document.getElementById("profileLocale");
                   
@@ -143,14 +153,7 @@
               //if (response && !response.error) {
                 //var numberOfTaggableFriends = response.data.length;
                 //if (response.data.length > 0) {
-                  //for (var i = 0; i < numberOfTaggableFriends; i++) {
-                     //var data = response.data;
-                     ////console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
-                     //friendsIDarray.push(data[i].id);
-                  //}
-                  //user_friends_list = friendsIDarray.join();
-                  //console.log('user_friends_list [length]:'+user_friends_list.length);
-                  //return;
+//where old for loop resided
                 //}else{
                   //console.log('taggable_friends data array is empty');
                 //}
