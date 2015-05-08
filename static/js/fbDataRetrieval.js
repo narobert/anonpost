@@ -48,7 +48,7 @@
                 "/me?fields=name,birthday,location,bio,address,locale,email,picture,taggable_friends",
                 function (response) {
                   if (response && !response.error) {
-                   console.log('Successful login for: ' + response.name);
+                   console.log('Successful login for: ' + response.name + ' Email: ' + response.email);
      //              console.log('response:'+JSON.stringify(response));
                    //console.log('response.data:'+JSON.stringify(response.taggable_friends.data));
                    //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
