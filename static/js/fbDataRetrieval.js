@@ -83,10 +83,13 @@
                   var user_friends_list;
                   var numberOfTaggableFriends = response.taggable_friends.data.length;
                   var data = response.taggable_friends.data;
+                  var profileFriendList = document.getElementById("profileFriendList");
+                  var myfriends = "";
 
                   for (var i = 0; i < numberOfTaggableFriends; i++) {
                      console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
-                     friendsIDnames.push(data[i].name);
+                     myfriends += "<p>" + data[i].name + "</p>";
+                     profileFriendList.innerHTML = myfriends;
                   }
 
                   user_friends_list = friendsIDnames.join();
@@ -94,13 +97,11 @@
                   console.log('user_friends_list [length]:'+user_friends_list.length);
                   console.log('user_friend_list [contents]:'+JSON.stringify(user_friends_list));
 
-                  var profileFriendList = document.getElementById("profileFriendList");
                   var profileName = document.getElementById("profileName");
                   var profileLocale = document.getElementById("profileLocale");
                   var profilePicture = document.getElementById("profilePicture");
                   var profileAge = document.getElementById("profileAge");
  
-                  profileFriendList.innerHTML = user_friends_list;
                   profilePicture.appendChild(profilePic);                   
                   profileName.innerHTML = name;
                   profileLocale.innerHTML = locale;
