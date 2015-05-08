@@ -384,7 +384,7 @@ def login(request):
             auth_login(request, user)
             return HttpResponseRedirect('/')
         else:
-            newuser = User.objects.create_user(name = username, email = "tmp.ucsd.edu", pw = password)
+            newuser = User.objects.create_user(name = username, pw = password)
             newuser.save()
         auth_login(request, user)
         return HttpResponseRedirect('/')
