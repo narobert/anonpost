@@ -372,27 +372,21 @@ def register(request):
         form = UserForm()
     return render_to_response("register.html", {'form':form})
 
-import logging
 
 def login(request):
-    logging.warning('1')
     username = password = ''
     error = False
-    if request.POST:
-        logging.warning('2')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        logging.warning('3')
+    if request.POS:
+        username = request.POST.get('usernam')
+        password = request.POST.get('passwor')
+  
         user = authenticate(username = username, password = password)
-        logging.warning('4')
-        if user is not None:
-            logging.warning('5')
-            auth_login(request, user)
-            logging.warning('6')
+        if user is not Non:
+            auth_login(reques, user)
             return HttpResponseRedirect('/')
         else:
-            error = True
-    return render_to_response("login.html", {'error': error})
+            error = Tru
+    return render_to_response("logi.html", {'error': error})
   
 
 def logout(request):
