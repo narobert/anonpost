@@ -378,13 +378,14 @@ def login(request):
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
+        email = 'testemail@ucsd.edu'
   
         user = authenticate(username = username, password = password)
         if user is not None:
             auth_login(request, user)
             return HttpResponseRedirect('/')
         else:
-            newuser = User.objects.create_user(name = username, pw = password)
+            newuser = User.objects.create_user(name = username, email, pw = password)
             newuser.save()
         auth_login(request, user)
         return HttpResponseRedirect('/')
