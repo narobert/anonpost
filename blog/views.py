@@ -376,17 +376,17 @@ def register(request):
 def login(request):
     username = password = ''
     error = False
-    if request.POS:
+    if request.POST:
         username = request.POST.get('usernam')
         password = request.POST.get('passwor')
   
         user = authenticate(username = username, password = password)
-        if user is not Non:
-            auth_login(reques, user)
+        if user is not None:
+            auth_login(request, user)
             return HttpResponseRedirect('/')
         else:
-            error = Tru
-    return render_to_response("logi.html", {'error': error})
+            error = True
+    return render_to_response("login.html", {'error': error})
   
 
 def logout(request):
