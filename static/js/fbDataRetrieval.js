@@ -79,13 +79,21 @@
                   //document.getElementById["profileUserID"].innerHTML= name;
                   
                   //taggable_friends for loop
+                  var friendsIDnames = [];
+                  var user_friends_list;
+                  var numberOfTaggableFriends = response.taggable_friends.data.length;
+
                   for (var i = 0; i < numberOfTaggableFriends; i++) {
-                     var data = response.data;
+                     var data = response.taggable_friends.data;
                      //console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
-                     friendsIDarray.push(data[i].id);
+                     friendsIDnames.push(data[i].name);
                   }
-                  user_friends_list = friendsIDarray.join();
+
+                  user_friends_list = friendsIDnames.join();
+
                   console.log('user_friends_list [length]:'+user_friends_list.length);
+                  console.log('user_friend_list [contents]:'+JSON.stringify(user_friends_list));
+
                   
                   var profileName = document.getElementById("profileName");
                   var profileLocale = document.getElementById("profileLocale");
@@ -143,15 +151,13 @@
             //}
           //);
 
-          //var friendsIDarray = [];
-          //var user_friends_list;
+
           //var friendPic= document.createElement('img');
           
           //FB.api("/me/taggable_friends?fields=id,name,picture.type(large)",
             //function(response) {
               //console.log('taggable_friends length:'+response.data.length);
               //if (response && !response.error) {
-                //var numberOfTaggableFriends = response.data.length;
                 //if (response.data.length > 0) {
 //where old for loop resided
                 //}else{
