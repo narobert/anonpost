@@ -94,13 +94,13 @@
                   console.log('user_friends_list [length]:'+user_friends_list.length);
                   console.log('user_friend_list [contents]:'+JSON.stringify(user_friends_list));
 
-                  
+                  var profileFriendList = document.getElementById("profileFriendList");
                   var profileName = document.getElementById("profileName");
                   var profileLocale = document.getElementById("profileLocale");
-                  
-                  var profilePicture= document.getElementById("profilePicture");
-                  var profileAge= document.getElementById("profileAge");
+                  var profilePicture = document.getElementById("profilePicture");
+                  var profileAge = document.getElementById("profileAge");
  
+                  profileFriendList.innerHTML = user_friends_list;
                   profilePicture.appendChild(profilePic);                   
                   profileName.innerHTML = name;
                   profileLocale.innerHTML = locale;
