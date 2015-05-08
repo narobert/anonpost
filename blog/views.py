@@ -375,17 +375,19 @@ def register(request):
 
 def login(request):
     username = password = ''
-    error = False
     if request.POST:
-        username = request.POST.get('usernam')
-        password = request.POST.get('passwor')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
   
         user = authenticate(username = username, password = password)
         if user is not None:
             auth_login(request, user)
             return HttpResponseRedirect('/')
         else:
-            error = True
+            newuser = User.objects.create_user(name = username, email = "tmp.ucsd.edu", pw = password)
+            newuser.save()
+        auth_login(request, user)
+        return HttpResponseRedirect('/')
     return render_to_response("login.html", {'error': error})
   
 
