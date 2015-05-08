@@ -89,10 +89,11 @@
                   for (var i = 0; i < numberOfTaggableFriends; i++) {
                      console.log('data ID of person:'+data[i].id+'; name of person:'+data[i].name+'; friends profile picture:'+data[i].picture.data.url);
                      myfriends += "<p>" + data[i].name + "</p>";
-                     profileFriendList.innerHTML = myfriends;
                   }
 
-                  user_friends_list = friendsIDnames.join();
+                  profileFriendList.innerHTML = myfriends;
+
+                  //user_friends_list = friendsIDnames.join();
 
                   console.log('user_friends_list [length]:'+user_friends_list.length);
                   console.log('user_friend_list [contents]:'+JSON.stringify(user_friends_list));

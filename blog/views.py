@@ -374,15 +374,20 @@ def register(request):
 
 
 def login(request):
+    print "1"
     username = password = ''
     error = False
     if request.POST:
+        print "2"
         username = request.POST.get('username')
         password = request.POST.get('password')
-  
+        print "3"
         user = authenticate(username = username, password = password)
+        print "4"
         if user is not None:
+            print "5"
             auth_login(request, user)
+            print "6"
             return HttpResponseRedirect('/')
         else:
             error = True
